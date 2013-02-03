@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Headlines</h1>
+    <div id="list">
+      
+    </div>
+  </body>
+
+  <script src="/javascripts/zepto.js"></script>
+  <script src="/javascripts/handlebars.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  
+  <script id="headline-template" type="text/x-handlebars-template">
+    {{#headlines}}
+      <h2><a href="{{links.web.href}}">{{headline}}</a></h2>
+      <p>{{description}}</p>
+    {{/headlines}}
+  </script>
+  
+  <script>
+    var socket = io.connect('http://localhost');
+
+    // http://paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/
+    (function(){var b,d,c=this,a=c.console;c.log=b=function(){d.push(arguments);a&&a.log[a.firebug?"apply":"call"](a,Array.prototype.slice.call(arguments))};c.logargs=function(e){b(e,arguments.callee.caller.arguments)};b.history=d=[]})();
+
+
+    socket.on('headlines', function(data){
+      log("New headlines!")
+      headlineHandler(data)
+    })
+
+    socket.on('init-headlines', function (data){
+      log("Initializing headlines...")
+      headlineHandler(data)
+    })
+
+    function headlineHandler(data){
+      
+      if(!data) {
+        log('apparently no data...')
+        return 
+      }
+      
+      // console.dir(data)
+      
+      var source   = $("#headline-template").html()
+      var template = Handlebars.compile(source)
+
+      var result = template(data)
+      
+      $('#list')
+        .html('')
+        .html(result)
+      
+      $('#list > h2').first().prepend("<b>Latest:  </b>")
+
+    }
+    
+  </script>
+  
+</html>
