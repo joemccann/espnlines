@@ -23,11 +23,11 @@
   </script>
   
   <script>
-    var socket = io.connect('http://espnlines.jit.su')
-
-    // http://paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/
-    (function(){var b,d,c=this,a=c.console;c.log=b=function(){d.push(arguments);a&&a.log[a.firebug?"apply":"call"](a,Array.prototype.slice.call(arguments))};c.logargs=function(e){b(e,arguments.callee.caller.arguments)};b.history=d=[]})();
-
+  
+  // http://paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/
+  (function(){var b,d,c=this,a=c.console;c.log=b=function(){d.push(arguments);a&&a.log[a.firebug?"apply":"call"](a,Array.prototype.slice.call(arguments))};c.logargs=function(e){b(e,arguments.callee.caller.arguments)};b.history=d=[]})();
+  
+    var socket = io.connect(document.location.href);
 
     socket.on('headlines', function(data){
       log("New headlines!")
