@@ -19,5 +19,7 @@ License
 -
 
 MIT, budday
+
 Copyright(c) 2013 
+
 Joe McCann <joe@subprint.com>

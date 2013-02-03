@@ -1,7 +1,7 @@
 {
   "name": "ESPNLines",
-  "description": "ESPNLines is a simple, realtime app that fetches the latest sports headlines from ESPN's API."
-  "version": "0.0.1",
+  "description": "ESPNLines is a simple, realtime app that fetches the latest sports headlines from ESPN's API.",
+  "version": "0.0.1-1",
   "private": true,
   "scripts": {
     "start": "node app"
@@ -17,5 +17,5 @@
     "colors": ">=0.6.0-1",
     "socket.io": ">=0.9.13"
   },
-  "subdomain": "espnlines"  
+  "subdomain": "espnlines"
 }
