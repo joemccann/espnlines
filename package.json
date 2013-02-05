@@ -1,7 +1,7 @@
 {
   "name": "ESPNLines",
   "description": "ESPNLines is a simple, realtime app that fetches the latest sports headlines from ESPN's API.",
-  "version": "0.0.1-7",
+  "version": "0.0.1-8",
   "private": true,
   "scripts": {
     "start": "node app.js"

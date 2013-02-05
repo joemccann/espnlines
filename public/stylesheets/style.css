@@ -1,7 +1,10 @@
 body {
-  padding: 50px;
+  padding: 2% 4%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 a {
   color: #00b7ff;
+}
+img {
+  max-width: 100%;
 }
