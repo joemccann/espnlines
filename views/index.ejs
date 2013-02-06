@@ -19,9 +19,11 @@
     {{#headlines}}
       <h2><a href="{{links.web.href}}">{{headline}}</a></h2>
       <p>{{description}}</p>
-      {{#images}}
-        <img src="{{url}}">
-      {{/images}}
+      {{#if images.[0]}}
+      <a href="{{links.web.href}}">
+        <img src="{{images.[0].url}}">
+      </a>
+      {{/if}}
     {{/headlines}}
   </script>
   
