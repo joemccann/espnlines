@@ -2,17 +2,16 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/css/style.css' />
   </head>
   <body>
     <h1>Headlines</h1>
     <div id="list">
-      
     </div>
   </body>
 
-  <script src="/javascripts/zepto.js"></script>
-  <script src="/javascripts/handlebars.js"></script>
+  <script src="/js/zepto.js"></script>
+  <script src="/js/handlebars.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   
   <script id="headline-template" type="text/x-handlebars-template">
@@ -34,16 +33,18 @@
   
     var socket = io.connect(document.location.href);
 
-    socket.on('headlines', function(data){
-      log("New headlines!")
-      headlineHandler(data)
-    })
-
     socket.on('init-headlines', function (data){
       log("Initializing headlines...")
       headlineHandler(data)
     })
 
+    socket.on('headlines', function(data){
+      log("New headlines!")
+      headlineHandler(data)
+      updateTitle()
+    })
+
+    // Update UI with new headlines
     function headlineHandler(data){
       
       if(!data) {
@@ -64,6 +65,24 @@
       
       $('#list > h2').first().prepend("<b>Latest:  </b>")
 
+    }
+    
+    // Notify user via Title that new updates are here
+    function updateTitle(){
+      
+      var isOldTitle = oldTitle = document.title
+      var newTitle = "New Headlines!"
+      
+      var titleInterval = setInterval(function(){
+        document.title = isOldTitle ? oldTitle : newTitle
+        isOldTitle = !isOldTitle
+      }, 700)
+
+      $(window).focus(function(){
+          clearInterval(titleInterval)
+          document.title = oldTitle
+      })
+      
     }
     
   </script>
